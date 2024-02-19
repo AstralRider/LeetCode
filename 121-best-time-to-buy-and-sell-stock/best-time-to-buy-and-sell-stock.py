@@ -4,6 +4,7 @@ class Solution:
         L = 0 
         R = L + 1
         while R < len(prices):
+            #if we find a right value smaller than our left value, move left pointer there.
           if prices[R] < prices[L]:
             L = R
             R += 1
