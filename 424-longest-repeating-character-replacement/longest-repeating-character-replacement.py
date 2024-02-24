@@ -10,11 +10,8 @@ class Solution:
           charMap[s[R]] = 1 + charMap.get(s[R], 0)
           count = max(charMap.values())
           
-          while (R - L + 1) - count > k:
-            if charMap[s[L]] == 1 or charMap[s[L]] == 0:
-              charMap[s[L]] = 0
-            else:
-              charMap[s[L]] -= 1
+          if (R - L + 1) - count > k:  
+            charMap[s[L]] -= 1
             L += 1
           
           else:
