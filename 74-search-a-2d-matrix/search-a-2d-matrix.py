@@ -19,19 +19,19 @@ class Solution:
             break
 
         #can have a case where top > bottom
-        # if not top <= bottom:
-        #   return False
+        if not top <= bottom:
+          return False
         #regular array binary search
-        
-        left = 0
-        right = COLS - 1
-        while left <= right:
-          mid = (left + right) // 2
-          if target > matrix[row][mid]:
-            left = mid + 1
-          elif target < matrix[row][mid]:
-            right = mid - 1
-          else:
-            return True
-        return False
+        else:
+          left = 0
+          right = COLS - 1
+          while left <= right:
+            mid = (left + right) // 2
+            if target > matrix[row][mid]:
+              left = mid + 1
+            elif target < matrix[row][mid]:
+              right = mid - 1
+            else:
+              return True
+          return False
             
