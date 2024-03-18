@@ -7,35 +7,31 @@ class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         if not head:
           return []
+
+        #use a dummy node to get the prev node of the one we need to delete
+        dummy = ListNode(0, head)
+        left = dummy
+        right = head
+
+        #move right n times before moving left points
+        while n > 0 and right:
+          n -= 1
+          right = right.next
+
+        #move L and R together
+        while right:
+          left = left.next
+          right = right.next
         
-        length = 0
-        curr = head
-        while curr:
-          curr = curr.next
-          length += 1
-        node_to_remove = length - n
-
-        if length < 2:
-          return
-
-        curr = head
-        prev = None
-        pos = 0
-        while pos < node_to_remove:
-          prev = curr
-          curr = curr.next
-          pos += 1
-
-        if curr:
-          if not curr.next:
-            prev.next = None
-          elif not prev:
-            curr=curr.next
-            head = curr
-          else:
-            prev.next = curr.next
+        left.next = left.next.next
         
-        return head
+        #remember to return dummy.next for edge cases
+        return dummy.next
+
+
+
+
+
   
           
 
