@@ -17,6 +17,7 @@ class Solution:
           queue.append(root)
         
         while len(queue) > 0:
+          
           rightMost = None
           for i in range(len(queue)):
             curr = queue.popleft()
@@ -25,6 +26,9 @@ class Solution:
               queue.append(curr.left)
             if curr.right:
               queue.append(curr.right)
+
+          #right most will always be last node in a level
+          #we append the node last set as rightMost after scanning the level is done
           self.output.append(rightMost.val)
         
         return self.output
