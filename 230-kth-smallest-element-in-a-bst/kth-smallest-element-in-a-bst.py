@@ -6,21 +6,34 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        self.count = k
-        return self.dfs(root)
+        self.count = 0
+        self.kth = None
+        self.dfs(root, k)
+        return self.kth
+
+  
     
-    def dfs(self, root):
-      if not root:
-            return None
+    def dfs(self, root, k):
+      if root is None:
+        return
+        
+      self.dfs(root.left, k)
+      
+      #Remember to increment count and check count after visiting left
+      self.count += 1
 
-      left = self.dfs(root.left)
-      if left is not None:
-        return left
+      if self.count == k:
+        self.kth = root.val
+        return
 
-      self.count -= 1
-      if self.count == 0:
-        return root.val
+      self.dfs(root.right, k)
 
-      return self.dfs(root.right)
+    #Extend basic in order traversal
+    # def inorder(root):
+    # if not root:
+    #     return    
+    # inorder(root.left)
+    # print(root.val)
+    # inorder(root.right)
 
 
