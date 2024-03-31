@@ -15,6 +15,7 @@ class Solution:
         
         res = min(nums[mid], res)
 
+        #key condition for all rotated sorted array problems nums[L] <= nums[mid]
         if nums[L] <= nums[mid]:
           L = mid + 1
         else:
