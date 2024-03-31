@@ -5,6 +5,9 @@ class Solution:
         stack = []
 
         for i in range(len(temperatures)):
+          if not stack:
+            stack.append((i, temperatures[i]))
+          else:
             while stack and temperatures[i] > stack[-1][1]:
               idx, temp = stack.pop()
               res[idx] = i - idx
