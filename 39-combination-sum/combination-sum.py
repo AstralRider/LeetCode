@@ -13,11 +13,9 @@ class Solution:
         return
       elif index == len(candidates):
         return
-      
       curCom.append(candidates[index])
-      curSum += candidates[index]
-      self.helper(index, curSum, combinations, curCom, candidates, target)
-      val = curCom.pop()
-      curSum -= val
 
+      self.helper(index, curSum + candidates[index], combinations, curCom, candidates, target)
+      curCom.pop()
+    
       self.helper(index + 1, curSum, combinations, curCom, candidates, target)
