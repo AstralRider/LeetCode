@@ -21,6 +21,7 @@ class Solution:
 
       if self.count == 0:
         self.value = root.val
+        return
 
 
 
