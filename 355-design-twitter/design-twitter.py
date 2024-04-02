@@ -22,8 +22,10 @@ class Twitter:
         if followerId in self.tweets:
           index = len(self.tweets[followerId]) - 1
           count, tweetId = self.tweets[followerId][index]
-          heapq.heappush(minHeap, [count, tweetId, followerId, index - 1])
+          minHeap.append([count, tweetId, followerId, index - 1])
       
+      heapq.heapify(minHeap)
+
       while minHeap and len(feed) < 10:
         count, tweetId, followerId, index = heapq.heappop(minHeap)
         feed.append(tweetId)
