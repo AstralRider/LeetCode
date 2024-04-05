@@ -7,7 +7,7 @@ class Solution:
 
     def helper(self, i, curSet, combinations, candidates, target, total):
       if total == target:
-        combinations.append(curSet.copy())
+        combinations.append(curSet[:])
         return
 
       elif i == len(candidates) or total > target:
