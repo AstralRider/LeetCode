@@ -6,7 +6,7 @@ class Solution:
           nextPerms = []
           for p in perms:
             for i in range(len(p) + 1):
-              pCopy = p.copy()
+              pCopy = p[:]
               pCopy.insert(i, n)
               nextPerms.append(pCopy)
           perms = nextPerms
