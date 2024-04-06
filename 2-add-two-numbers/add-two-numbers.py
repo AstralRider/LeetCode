@@ -18,6 +18,7 @@ class Solution:
           val2 = p2.val if p2 else 0
 
           sumVal = val1 + val2 + carry
+
           carry = sumVal // 10
           nodeVal = sumVal % 10
 
