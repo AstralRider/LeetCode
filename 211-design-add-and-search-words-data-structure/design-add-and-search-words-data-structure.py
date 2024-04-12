@@ -25,8 +25,8 @@ class WordDictionary:
          
             for j in range(i, len(word)):
                 if word[j] == ".":
-                    for n in curr.children.values():
-                        if dfs(j + 1, n):
+                    for n in curr.children:
+                        if dfs(j + 1, curr.children[n]):
                             return True
                     return False
                 else:
