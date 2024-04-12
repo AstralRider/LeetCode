@@ -35,7 +35,8 @@ class WordDictionary:
                 else:
                     if word[j] not in curr.children:
                         return False
-                    return dfs(j+1, curr.children[word[j]])
+                    curr = curr.children[word[j]]
+
             return curr.word
         
         return dfs(0, self.root)
