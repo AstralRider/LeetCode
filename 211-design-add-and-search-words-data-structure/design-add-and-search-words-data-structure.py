@@ -22,10 +22,7 @@ class WordDictionary:
 
         def dfs(i, node):
             curr = node
-            
-            if i == len(word):
-                return curr.word
-            
+         
             for j in range(i, len(word)):
                 if word[j] == ".":
                     for n in curr.children.values():
