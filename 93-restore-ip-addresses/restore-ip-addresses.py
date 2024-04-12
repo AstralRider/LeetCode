@@ -16,7 +16,7 @@ class Solution:
                 if len(digits) > 1 and digits[0] == '0':
                     return False
 
-                if len(digits) > 3 or int(digits) > 255:
+                if int(digits) > 255:
                     return False
                 
                 dfs(j+1, dots +1 , string + digits + ".")
