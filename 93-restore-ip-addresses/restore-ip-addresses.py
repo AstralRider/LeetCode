@@ -3,10 +3,11 @@ class Solution:
         res = []
 
         def dfs(i, dots, string):
+            print(string)
             if i >= len(s) and dots == 4:
                 res.append(string[:-1])
                 return
-            if dots >= 4:
+            if dots == 4:
                 return
             
             for j in range(i,  len(s)):
