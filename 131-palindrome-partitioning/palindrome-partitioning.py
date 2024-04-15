@@ -1,30 +1,32 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res = []
-        curr = []
-        def dfs(i):
+
+        def backtrack(i, curr):
             if i >= len(s):
                 res.append(curr.copy())
                 return
-          
+            
             for j in range(i, len(s)):
-                if self.isPal(i, j, s):
-                    curr.append(s[i: j + 1])
-                    dfs(j + 1)
+                substring = s[i:j+1]
+                if self.isPal(i,j,s):
+                    curr.append(substring)
+                    backtrack(j + 1, curr)
                     curr.pop()
         
-        dfs(0)
+        backtrack(0, [])
         return res
     
-    def isPal(self, L, R, string):
+    def isPal(self,i, j, s):
+        L = i
+        R = j
 
         while L <= R:
-            if string[L] != string[R]:
-                return False
-            else:
+            if s[L] == s[R]:
                 L += 1
                 R -= 1
+            else: 
+                return False
         return True
-    
-          
+            
     
