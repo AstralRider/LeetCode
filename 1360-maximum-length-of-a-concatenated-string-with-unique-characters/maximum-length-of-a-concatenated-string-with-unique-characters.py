@@ -1,22 +1,19 @@
 class Solution:
     def maxLength(self, arr: List[str]) -> int:
         self.length = 0
-        
-        def backtrack(i, chars):
-            if i == len(arr):
-                self.length = max(self.length, len(chars))
+
+        def backtrack(i, string):
+            if i >= len(arr):
+                if len(string) == len(set(string)):
+                    self.length = max(self.length, len(string))
                 return
             
-            if len(set(arr[i])) == len(arr[i]):  # Check if current string has no duplicates
-                for c in arr[i]:
-                    if c in chars:
-                        break
-                else:
-                    backtrack(i + 1, chars | set(arr[i]))
-            
-            backtrack(i + 1, chars)
+            backtrack(i + 1, string + arr[i])
+
+            backtrack(i + 1, string)
         
-        backtrack(0, set())
+        backtrack(0, "")
+
         return self.length
     
     def checkUnique(self, string):
