@@ -3,9 +3,10 @@ class Solution:
         self.length = 0
 
         def backtrack(i, string):
+            
+            if self.checkUnique(string):
+                self.length = max(self.length, len(string))
             if i >= len(arr):
-                if self.checkUnique(string):
-                    self.length = max(self.length, len(string))
                 return
 
             backtrack(i + 1, string + arr[i])
