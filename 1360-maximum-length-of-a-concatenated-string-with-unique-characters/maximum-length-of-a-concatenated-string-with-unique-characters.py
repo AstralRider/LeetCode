@@ -4,7 +4,7 @@ class Solution:
 
         def backtrack(i, string):
             if i >= len(arr):
-                if self.checkUnique(string):
+                if len(string) == len(set(string)):
                     self.length = max(self.length, len(string))
                 return
             
