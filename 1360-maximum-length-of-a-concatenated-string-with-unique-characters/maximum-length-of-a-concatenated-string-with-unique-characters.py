@@ -16,11 +16,3 @@ class Solution:
 
         return self.length
     
-    def checkUnique(self, string):
-        chars = set()
-
-        for s in string:
-            if s in chars:
-                return False
-            chars.add(s)
-        return True
