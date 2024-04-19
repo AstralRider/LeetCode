@@ -1,4 +1,4 @@
-class TrieNode():
+class TrieNode:
     def __init__(self):
         self.children = {}
         self.word = False
@@ -11,32 +11,37 @@ class WordDictionary:
 
     def addWord(self, word: str) -> None:
         curr = self.root
-        for c in word:
-            if c not in curr.children:
-                curr.children[c] = TrieNode()
-            curr = curr.children[c]
+        for char in word:
+            if char not in curr.children:
+                curr.children[char] = TrieNode()
+            curr = curr.children[char]
         curr.word = True
-        
-    def search(self, word: str) -> bool:
-        
 
-        def dfs(i, node):
-            curr = node
-         
+    def search(self, word: str) -> bool:
+
+        def backtrack(i, curr):
+            if i >= len(word):
+                return curr.word
+            
             for j in range(i, len(word)):
                 if word[j] == ".":
-                    for n in curr.children:
-                        if dfs(j + 1, curr.children[n]):
+                    for curr in curr.children.values():
+                        if backtrack(j + 1, curr):
                             return True
                     return False
                 else:
                     if word[j] not in curr.children:
                         return False
                     curr = curr.children[word[j]]
-
             return curr.word
-        
-        return dfs(0, self.root)
+        return backtrack(0, self.root)
+            
+#bad mad dad 
+# .ad
+
+
+
+
 
 
 
