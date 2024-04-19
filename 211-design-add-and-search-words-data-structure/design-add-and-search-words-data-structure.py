@@ -20,8 +20,8 @@ class WordDictionary:
     def search(self, word: str) -> bool:
 
         def backtrack(i, curr):
-            if i >= len(word):
-                return curr.word
+            # if i >= len(word):
+            #     return curr.word
             
             for j in range(i, len(word)):
                 if word[j] == ".":
