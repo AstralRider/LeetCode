@@ -1,32 +1,32 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res = []
+        curr = []
 
-        def backtrack(i, curr):
-            if i >= len(s):
+        def backtrack(i):
+            if i == len(s):
                 res.append(curr.copy())
                 return
             
             for j in range(i, len(s)):
-                substring = s[i:j+1]
-                if self.isPal(i,j,s):
-                    curr.append(substring)
-                    backtrack(j + 1, curr)
+                partition = s[i:j+1]
+                if self.isPalindromic(i,j,s):
+                    curr.append(partition)
+                    backtrack(j+1)
                     curr.pop()
-        
-        backtrack(0, [])
+
+        backtrack(0)
         return res
     
-    def isPal(self,i, j, s):
-        L = i
-        R = j
+    def isPalindromic(self, start, end, string):
+        L = start
+        R = end
 
         while L <= R:
-            if s[L] == s[R]:
+            if string[L] != string[R]:
+                return False
+            else:
                 L += 1
                 R -= 1
-            else: 
-                return False
         return True
             
-    
