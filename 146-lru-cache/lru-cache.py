@@ -1,64 +1,62 @@
-class ListNode:
-  def __init__(self, key, val, next=None, prev=None):
-    self.val = val
-    self.key = key
-    self.next = next
-    self.prev = prev
+class Node:
+    def __init__(self, key, val, prev=None, next=None):
+        self.key = key
+        self.val = val
+        self.prev = prev
+        self.next = next
 
 
 class LRUCache:
 
     def __init__(self, capacity: int):
         self.capacity = capacity
-        self.map = {}
-        self.left = ListNode("Left", 0)
-        self.right = ListNode("Right", 0)
-        self.left.next = self.right
-        self.right.prev = self.left
-        self.size = 0
-    
-    def remove(self, node):
-      prev = node.prev
-      nextNode = node.next
-      prev.next = nextNode
-      nextNode.prev = prev
-      self.size -= 1
-      
-    
-    def insert(self, node):
-      prev = self.right.prev
-      prev.next = node
-      node.next = self.right
-      node.prev = prev
-      self.right.prev = node
-      self.size += 1
-      
+        self.hashMap = {}
+        self.lru = Node(0, 0)
+        self.mru = Node(0, 0)
+        self.lru.next = self.mru
+        self.mru.prev = self.lru
 
+    def remove(self, key):
+        node = self.hashMap[key]
+        prev = node.prev
+        next_node = node.next
+        #set prev node's next pointer to be the node after
+        prev.next = next_node
+        #set next node's prev pointer to be the node before
+        next_node.prev = prev
+        del self.hashMap[key]
+    
+    def insert(self, key, val):
+        new_node = Node(key, val)
+        prev_mru = self.mru.prev
+
+        prev_mru.next = new_node
+        new_node.next = self.mru
+        new_node.prev = prev_mru
+        self.mru.prev = new_node
+        self.hashMap[key] = new_node
 
     def get(self, key: int) -> int:
-      if key in self.map:
-        self.remove(self.map[key])
-        self.insert(self.map[key])
-        return self.map[key].val
-      else:
-        return -1
+        if key in self.hashMap:
+            val = self.hashMap[key].val
+            self.remove(key)
+            self.insert(key, val)
+            return self.hashMap[key].val
+        else:
+            return -1
+
         
 
     def put(self, key: int, value: int) -> None:
-      if key in self.map:
-        self.remove(self.map[key])
-      self.map[key] = ListNode(key, value)
-      self.insert(self.map[key])
-      
-      if self.size > self.capacity:
-        node = self.left.next
-        self.remove(node)
-        del self.map[node.key]
-        
-
-
-        
-
+        if key in self.hashMap:
+            self.remove(key)
+            self.insert(key, value)
+        elif self.capacity == len(self.hashMap):
+            node_to_remove = self.lru.next
+            self.remove(node_to_remove.key)
+            self.insert(key, value)
+        else:
+            self.insert(key, value)
         
 
 
