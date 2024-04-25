@@ -1,7 +1,7 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        #check if there are any fresh oranges
-        #check if any oranges are 4 directionally isolated
+       
+       
         
         ROWS = len(grid)
         COLS = len(grid[0])
@@ -12,6 +12,7 @@ class Solution:
 
         for r in range(ROWS):
             for c in range(COLS):
+                #find rotten oranges, add it a queue to perform multi-source bfs
                 if grid[r][c] == 2:
                     queue.append((r,c))
                 if grid[r][c] == 1:
