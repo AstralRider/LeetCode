@@ -7,7 +7,6 @@ class Solution:
         COLS = len(grid[0])
         queue = collections.deque()
         
-        visited = set()
 
         freshOrangeCount = 0
 
@@ -15,7 +14,6 @@ class Solution:
             for c in range(COLS):
                 if grid[r][c] == 2:
                     queue.append((r,c))
-                    visited.add((r,c))
                 if grid[r][c] == 1:
                     freshOrangeCount += 1
         
@@ -39,13 +37,13 @@ class Solution:
                         or new_col not in range(COLS)
                         or new_row < 0
                         or new_col < 0
-                        or (new_row, new_col) in visited
                         or grid[new_row][new_col] != 1):
                             continue
                     
                     queue.append((new_row, new_col))
                     freshOrangeCount -= 1
-                    visited.add((new_row, new_col))
+                    grid[new_row][new_col] = 2
+                    
 
             minute += 1
         
