@@ -9,19 +9,23 @@ class Node:
 
 class Solution:
     def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        copyList = {None: None}
+        copyMap = {None: None}
+
+        #first create every old:new pairing in the hashmap
 
         curr = head
+
         while curr:
-          copy = Node(curr.val)
-          copyList[curr] = copy
-          curr = curr.next
+            clone = Node(curr.val)
+            copyMap[curr] = clone
+            curr = curr.next
         
         curr = head
+ 
         while curr:
-          copy = copyList[curr]
-          copy.next = copyList[curr.next]
-          copy.random = copyList[curr.random]
-          curr = curr.next
+            copyMap[curr].next = copyMap.get(curr.next)
+            copyMap[curr].random = copyMap.get(curr.random)
+            curr = curr.next
         
-        return copyList[head]
+        return copyMap[head]
+        
