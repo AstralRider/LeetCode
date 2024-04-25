@@ -33,22 +33,15 @@ class Solution:
                     new_col = dc + c
 
                     if(
-                        new_row not in range(ROWS)
-                        or new_col not in range(COLS)
-                        or new_row < 0
-                        or new_col < 0
-                        or grid[new_row][new_col] != 1):
-                            continue
+                        new_row in range(ROWS)
+                        and new_col  in range(COLS)
+                        and grid[new_row][new_col] == 1):
+                            queue.append((new_row, new_col))
+                            freshOrangeCount -= 1
+                            grid[new_row][new_col] = 2
                     
-                    queue.append((new_row, new_col))
-                    freshOrangeCount -= 1
-                    grid[new_row][new_col] = 2
-                    
-
             minute += 1
-        
-        print(minute, freshOrangeCount)
-        
+               
         if freshOrangeCount == 0:
             return minute
         else:
