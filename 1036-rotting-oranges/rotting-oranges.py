@@ -17,11 +17,9 @@ class Solution:
                 if grid[r][c] == 1:
                     freshOrangeCount += 1
         
-        minute = -1
-        if not freshOrangeCount:
-            return 0 
+        minute = 0
 
-        while queue:
+        while queue and freshOrangeCount > 0:
              
             for i in range(len(queue)):
                 r,c = queue.popleft()
