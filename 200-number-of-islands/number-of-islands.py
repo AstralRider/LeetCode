@@ -1,39 +1,38 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        
         #dfs or bfs
-        # use a set to track visited 1's
-        # if it is a 1 we haven't seen before, increment islands by 1
+        #find all the 1's connected the current node
+        #add these positions to a set
+        #if we encounter it again when running dfs/bfs, we skip it
+
         ROWS = len(grid)
         COLS = len(grid[0])
         visited = set()
 
-        numberOfIslands = 0
+        islands = 0
 
-        def dfs(r,c,visited):
+        def dfs(r,c):
             if (
-                r < 0
-                or c < 0
-                or r >= ROWS
-                or c >= COLS
+                min(r,c) < 0
+                or r == ROWS
+                or c == COLS
+                or (r,c) in visited
                 or grid[r][c] == "0"
-                or (r,c) in visited):
-                    return
+            ):
+                return
             
             visited.add((r,c))
 
-            dfs(r+1,c, visited)
-            dfs(r-1,c, visited)
-            dfs(r,c+1, visited)
-            dfs(r,c-1, visited)
-
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r,c +  1)
+            dfs(r,c -  1)
+        
         for r in range(ROWS):
             for c in range(COLS):
                 if (r,c) not in visited and grid[r][c] == "1":
-                    dfs(r,c,visited)
-                    numberOfIslands += 1
+                    dfs(r,c)
+                    islands += 1
+        return islands
 
-        return numberOfIslands
-
-
-
+        
