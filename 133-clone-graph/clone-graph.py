@@ -22,7 +22,7 @@ class Solution:
             for n in node.neighbors:
                 clone.neighbors.append(dfs(n))
             
-            return cloneMap[node]
+            return clone
 
         if node:
            return dfs(node)
