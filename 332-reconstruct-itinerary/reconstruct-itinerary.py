@@ -22,9 +22,6 @@ class Solution:
         dfs("JFK")
         res.reverse()
 
-        if len(res) != len(tickets) + 1:
-            return []
-
         return res
 
 #Code works fine just not on leetcode due to TLE
