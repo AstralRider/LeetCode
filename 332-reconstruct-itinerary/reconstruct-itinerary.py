@@ -23,6 +23,7 @@ class Solution:
             if src in adjList:
                 temp = adjList[src][:]
                 while temp and adjList[src]:
+                    #remove edge
                     val = adjList[src].pop()
                     dfs(val)
             print(res)
