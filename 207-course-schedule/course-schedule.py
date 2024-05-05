@@ -1,34 +1,34 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        
-        #build adjacency list
-        adjList = {}
-        for course, pre in prerequisites:
-            if course not in adjList:
-                adjList[course] = []
-            if pre not in adjList:
-                adjList[pre] = []
-            adjList[course].append(pre)
-        
-        visited = set()
-        path = set()
 
+        adjList = {}
+
+        #{1:[0], 0:[1]}
+
+        visited = set()
+        res = []
+        for i in range(numCourses):
+            adjList[i] = []
+
+        for src, pre in prerequisites:
+            adjList[src].append(pre)
+        
         def dfs(course):
-            if course in path:
-                return False
             if course in visited:
+                return False
+            if course in res:
                 return True
             
-            path.add(course)
-            
-            for prereq in adjList[course]:
-                if not dfs(prereq):
-                    return False
-            
-            path.remove(course)
             visited.add(course)
-            return True
 
+            for pre in adjList[course]:
+                if not dfs(pre):
+                    return False
+
+            visited.remove(course)
+            res.append(course)
+            return True
+        
         for course, pre in prerequisites:
             if not dfs(course):
                 return False
