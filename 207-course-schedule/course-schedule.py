@@ -6,7 +6,7 @@ class Solution:
         #{1:[0], 0:[1]}
 
         visited = set()
-        res = []
+        res = set()
         for i in range(numCourses):
             adjList[i] = []
 
@@ -26,7 +26,7 @@ class Solution:
                     return False
 
             visited.remove(course)
-            res.append(course)
+            res.add(course)
             return True
         
         for course, pre in prerequisites:
