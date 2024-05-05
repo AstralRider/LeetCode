@@ -17,7 +17,8 @@ class Solution:
 
         def dfs(src):
             if src in adjList:
-                while adjList[src]:
+                temp = adjList[src][:]
+                while temp and adjList[src]:
                     val = adjList[src].pop()
                     dfs(val)
             #an airport has no outgoing flights
