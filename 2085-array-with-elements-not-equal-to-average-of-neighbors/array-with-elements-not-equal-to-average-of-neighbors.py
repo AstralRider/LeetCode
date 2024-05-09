@@ -4,7 +4,6 @@ class Solution:
         r = len(nums)-1
         mid = r // 2 
 
-
         first = nums[0 : mid + 1]
  
         second = nums[mid + 1: len(nums)]
