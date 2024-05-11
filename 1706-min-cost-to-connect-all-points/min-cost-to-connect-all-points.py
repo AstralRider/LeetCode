@@ -29,7 +29,7 @@ class Solution:
         
         visit.add(0)
 
-        while minHeap:
+        while len(visit) < nodes:
             weight, src, dst = heapq.heappop(minHeap)
             if dst in visit:
                 continue
