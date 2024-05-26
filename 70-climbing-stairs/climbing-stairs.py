@@ -7,10 +7,13 @@ class Solution:
 
         i = 2
 
-        while i < n:
+        for idx in range(1, n-1):
             tmp = dp[1]
             dp[1] = tmp + dp[0]
             dp[0] = tmp
-            i += 1
         
         return dp[1]
+
+        #[1, 2]
+        #[2, 3]
+        #[3, 5]
