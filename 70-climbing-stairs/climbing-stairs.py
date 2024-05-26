@@ -2,8 +2,8 @@ class Solution:
     def climbStairs(self, n: int) -> int:
         dp = [1, 2]
 
-        if n < 2:
-            return dp[0]
+        if n <= 3:
+            return n
 
         i = 2
 
