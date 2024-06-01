@@ -3,24 +3,39 @@ class Solution:
         
         cache = {len(s) : 1}
 
-        def dfs(i):
-            if i in cache:
-                return cache[i]
-            
+        for i in range(len(s) - 1, -1, -1):
             if s[i] == '0':
-                return 0
+                cache[i] = 0
+                continue
 
-            #solve the sub problem
-            count = dfs(i + 1)
+            count = cache[i + 1]
 
             if (i + 1 < len(s) and (s[i] == '1' or (s[i] == '2' and s[i + 1] in '0123456'))):
+                count += cache[i + 2]
+            cache[i] = count
 
-                count += dfs(i + 2)
-                cache[i] = count
+        return cache[0]
+
+
+
+        # def dfs(i):
+        #     if i in cache:
+        #         return cache[i]
             
-            return count
+        #     if s[i] == '0':
+        #         return 0
+
+        #     #solve the sub problem
+        #     count = dfs(i + 1)
+
+        #     if (i + 1 < len(s) and (s[i] == '1' or (s[i] == '2' and s[i + 1] in '0123456'))):
+
+        #         count += dfs(i + 2)
+        #         cache[i] = count
+            
+        #     return count
         
-        return dfs(0)
+        # return dfs(0)
 
 
          
