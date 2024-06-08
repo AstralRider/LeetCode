@@ -6,13 +6,15 @@ class Solution:
         if total % 2 != 0:
             return False
 
-        target = total / 2
+        target = total // 2
         memo = {}
         def dfs(i, currSum, target, nums, memo):
-            if i == len(nums):
-                return False
             if (i, currSum) in memo:
                 return memo[(i, currSum)]
+            
+            if i == len(nums):
+                return False
+            
             if currSum == target:
                 return True
             
