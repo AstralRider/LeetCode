@@ -1,11 +1,8 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         
-        total = 0
-        for n in nums:
-            total += n
-            
-        print(total/2)
+        total = sum(nums)
+
         if total % 2 != 0:
             return False
 
