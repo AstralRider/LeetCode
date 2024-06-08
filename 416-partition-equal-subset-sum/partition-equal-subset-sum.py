@@ -12,10 +12,12 @@ class Solution:
             if (i, currSum) in memo:
                 return memo[(i, currSum)]
             
-            if i == len(nums):
+            if i == len(nums) or currSum > target:
+                memo[(i, currSum)] = False
                 return False
             
             if currSum == target:
+                memo[(i, currSum)] = True
                 return True
             
             skip = dfs(i + 1, currSum, target, nums,memo)
