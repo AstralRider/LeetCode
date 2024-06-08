@@ -4,8 +4,7 @@ class Solution:
         total = 0
         for n in nums:
             total += n
-        
-        
+            
         print(total/2)
         if total % 2 != 0:
             return False
