@@ -20,14 +20,9 @@ class Solution:
                 memo[(i, currSum)] = True
                 return True
             
-            skip = dfs(i + 1, currSum, target, nums,memo)
-            include = False
-            if nums[i] + currSum <= target:
-                include = dfs(i + 1, nums[i] + currSum, target, nums, memo)
-            
-            res = skip or include
+            res = dfs(i + 1, currSum, target, nums, memo) or dfs(i + 1, currSum + nums[i], target, nums, memo)
             memo[(i, currSum)] = res
-            return memo[(i, currSum)]
+            return res
    
         
         return dfs(0, 0, target, nums,memo)
