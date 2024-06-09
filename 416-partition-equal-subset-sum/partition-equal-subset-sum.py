@@ -7,25 +7,22 @@ class Solution:
             return False
 
         target = total // 2
-        memo = {}
-        def dfs(i, currSum, target, nums, memo):
-            if (i, currSum) in memo:
-                return memo[(i, currSum)]
-            
-            if i == len(nums) or currSum > target:
-                memo[(i, currSum)] = False
-                return False
-            
-            if currSum == target:
-                memo[(i, currSum)] = True
-                return True
-            
-            res = dfs(i + 1, currSum, target, nums, memo) or dfs(i + 1, currSum + nums[i], target, nums, memo)
-            memo[(i, currSum)] = res
-            return res
-   
+       
+        cache = [[False for _ in range(target + 1)] for _ in range(len(nums))]
+
+        for i in range(len(nums)):
+            cache[i][0] = True
         
-        return dfs(0, 0, target, nums,memo)
+        for i in range(1, len(nums)):
+            for s in range(1, target + 1):
+                if s < nums[i]:
+                    cache[i][s] = cache[i-1][s]
+                else:
+                    cache[i][s] = cache[i-1][s] or cache[i-1][s - nums[i]]
+
+        return cache[len(nums)-1][target]
+    
+
 
 
             
