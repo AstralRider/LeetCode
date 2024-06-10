@@ -22,15 +22,9 @@ class Solution:
                 if include != float("inf"):
                     include += 1
 
-            if skip > -1 and include > -1:
-                cache[(i, currSum)] = min(skip, include)
-                return cache[(i, currSum)]
-            elif skip > -1:
-                return skip
-            elif include > -1:
-                return include
-            else:
-                return -1
+            result = min(skip, include)
+            cache[(i, currSum)] = result
+            return result
         
         
         res = dfs(0,0, cache)
