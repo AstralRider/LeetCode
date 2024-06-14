@@ -9,17 +9,10 @@ class Solution:
         res = 0
 
         while l <= r:
-            if l == r:
-                res += 1
-                break
-            
-            elif people[l] + people[r] <= limit:
-                res += 1
+            if people[l] + people[r] <= limit:
                 l += 1
-                r -= 1
                 
-            else: 
-                res += 1
-                r -= 1
+            r -= 1
+            res += 1
     
         return res
