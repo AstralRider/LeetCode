@@ -8,7 +8,7 @@ class Solution:
             if i == len(s):
                 return True
 
-            cache[i] = False
+            
 
             for word in wordDict:
                 length = len(word)
@@ -18,6 +18,7 @@ class Solution:
                         cache[i] = True
                         return True
                     
-                        
+            cache[i] = False
+            return False
                         
         return dfs(0, {})
