@@ -6,10 +6,9 @@ class Solution:
             cache[i] = False
             for word in wordDict:
                 if i + len(word) <= len(s):
-                    if word == s[i:i+len(word)]:
-                        cache[i] = cache[i + len(word)]
-                    if cache[i]:
-                        break
+                    if word == s[i:i+len(word)] and cache[i + len(word)]:
+                        cache[i] = True
+                    
         
         return cache[0]
                     
