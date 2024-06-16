@@ -8,6 +8,7 @@ class Solution:
                 if i + len(word) <= len(s):
                     if word == s[i:i+len(word)] and cache[i + len(word)]:
                         cache[i] = True
+                        break
                     
         
         return cache[0]
