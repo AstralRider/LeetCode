@@ -1,41 +1,29 @@
 class Solution:
     def numDecodings(self, s: str) -> int:
-        
-        cache = {len(s) : 1}
 
-        for i in range(len(s) - 1, -1, -1):
+        cache = {len(s): 1}
+
+        def dfs(i, cache):
+            if i in cache:
+                return cache[i]
+            
             if s[i] == '0':
-                cache[i] = 0
-            else:
-                count = cache[i + 1]
+                return 0
 
-                if (i + 1 < len(s) and (s[i] == '1' or (s[i] == '2' and s[i + 1] in '0123456'))):
-                    count += cache[i + 2]
-                cache[i] = count
-
-        return cache[0]
-
-
-
-        # def dfs(i):
-        #     if i in cache:
-        #         return cache[i]
+            res = dfs(i+1, cache)
             
-        #     if s[i] == '0':
-        #         return 0
-
-        #     #solve the sub problem
-        #     count = dfs(i + 1)
-
-        #     if (i + 1 < len(s) and (s[i] == '1' or (s[i] == '2' and s[i + 1] in '0123456'))):
-
-        #         count += dfs(i + 2)
-        #         cache[i] = count
-            
-        #     return count
+            if i + 1 < len(s):
+                if s[i] =='1' or (s[i] == '2' and s[i+1] in '0123456'):
+                    # we consider i and i+1 as a valid pairing and are adding the number after it
+                    # to determine how many ways i can be decoded
+                    res += dfs(i + 2, cache)
+            cache[i] = res
+            return cache[i]
         
-        # return dfs(0)
+        return dfs(0, cache)
 
+            #         2 1 1
+            #"1 2 0 1 2 3 4"
 
          
 
