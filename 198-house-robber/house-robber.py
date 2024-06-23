@@ -1,10 +1,16 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        
-        h1, h2 = 0, 0
 
-        for n in nums:
-            tmp = max(h1 + n, h2)
-            h1 = h2
-            h2 = tmp
-        return h2
+        cache = {}
+        
+        def dfs(i, cache):
+            if i >= len(nums):
+                return 0
+            
+            if i in cache:
+                return cache[i]
+            
+            cache[i] = max(nums[i] + dfs(i+2, cache), dfs(i+1, cache))
+            return cache[i]
+
+        return dfs(0, cache)
