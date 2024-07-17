@@ -1,28 +1,26 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-    
-      res = float("inf")
-
-      L = 0
-      R = len(nums) - 1
-
-      while L <= R:
-        mid = (L + R) // 2
-
-        if nums[L] < nums[R]:
-          res = min(nums[L], res)
-          break
         
-        res = min(nums[mid], res)
+        l = 0
+        r = len(nums) - 1
 
-        #key condition for all rotated sorted array problems nums[L] <= nums[mid]
-        if nums[L] <= nums[mid]:
-          L = mid + 1
-        else:
-          R = mid - 1
+        res = nums[0]
 
-      return res
-      
+        while l <= r:
+            if nums[l] <= nums[r]:
+                res = min(res, nums[l])
+                break
+
+            mid = (l + r) // 2
+            res = min(res, nums[mid])
+
+            if nums[mid] >= nums[l]:
+                l = mid + 1
+            else:
+                r = mid - 1
+        
+        return res
+
 
 
 
