@@ -9,6 +9,7 @@ class Solution:
         while l <= r:
             mid = (l + r) // 2
 
+            #Gauss formula
             total = (mid/2)*(mid + 1)
 
             if n >= total:
