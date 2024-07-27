@@ -1,26 +1,16 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         
-        cache = {}
+        prevRow = [0] * n
 
-        def dfs(r,c):
-            if (r,c) in cache:
-                return cache[r,c]
-            if r >= m:
-                return 0
-            if c >= n:
-                return 0
-            
-            if r == m - 1 and c == n - 1:
-                return 1
+        for r in range(m - 1, -1, -1):
+            curRow = [0] * n
+            curRow[-1] = 1
+            # we want to skip the last column which has a 1 in it
+            for c in range(n - 2, -1, -1):
+                curRow[c] = curRow[c + 1] + prevRow[c]
+            prevRow = curRow
+        return prevRow[0]
 
-            right = dfs(r, c + 1)
-
-            down = dfs(r + 1, c)
-
-            cache[r,c] = right + down
-
-            return cache[r,c]
 
         
-        return dfs(0,0)
