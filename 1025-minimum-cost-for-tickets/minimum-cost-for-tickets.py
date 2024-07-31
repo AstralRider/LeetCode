@@ -1,6 +1,6 @@
 class Solution:
     def mincostTickets(self, days: List[int], costs: List[int]) -> int:
-
+        
         cache = {}
         
         def dfs(i, cache):
@@ -10,21 +10,29 @@ class Solution:
             if i == len(days):
                 return 0
             
-            j = i
-            travel = [1, 7, 30]
-            cache[i] = float("inf")
-            for t in range(len(travel)):
-                while j < len(days) and days[j] < days[i] + travel[t]:
-                    j += 1
-                res = dfs(j, cache) + costs[t]
-                cache[i] = min(cache[i], res)
 
+            cache[i] = float("inf")
+
+            l = i
+            passes = [1, 7, 30]
+
+            for k in range(len(costs)):
+
+                while l < len(days) and days[l] < passes[k] + days[i]:
+                    l += 1
+                
+                cache[i] = min(dfs(l, cache) + costs[k], cache[i])
+            
             return cache[i]
         
         return dfs(0, cache)
 
-                
-                
-             
-            
-            
+
+
+
+
+
+#              * + 7
+            # [1,4,6,7,8,20] 
+
+
