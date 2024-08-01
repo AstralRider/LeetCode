@@ -7,21 +7,19 @@ class Solution:
 
             if total == amount:
                 return 1
-
-            if i == len(coins):
+            
+            if total > amount:
                 return 0
-            
-            
             
             if (i, total) in cache:
                 return cache[i, total]
 
+            if i == len(coins):
+                return 0
+
             cache[i, total] = 0
-            for j in range(i, len(coins)):
-                if total + coins[j] <= amount:
-                    cache[i, total] += dfs(j, total + coins[j]) 
-                
-            
+            cache[i, total] += dfs(i, total + coins[i]) + dfs(i + 1, total)
+                   
             return cache[i, total]
         return dfs(0, 0)
 
