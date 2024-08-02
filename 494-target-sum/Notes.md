@@ -1,1 +1,1 @@
-<h2>target-sum Notes</h2><hr>[ Time taken: 38 m 56 s ]
+<h2>target-sum Notes</h2><hr>[ Time taken: 7 m 19 s ]
