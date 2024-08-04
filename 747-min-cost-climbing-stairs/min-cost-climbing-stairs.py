@@ -1,20 +1,10 @@
 class Solution:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         
-        cache = {}
-
-        def dfs(i):
-            if i in cache:
-                return cache[i]
-
-            if i >= len(cost):
-                return 0
-            
-            one = dfs(i + 1)
-            two = dfs(i + 2)
-
-            cache[i] = min(one, two) + cost[i]
-            
-            return cache[i]
+        for i in range(len(cost) -3, -1, -1):
+            cost[i] += min(cost[i + 1], cost[i + 2])
         
-        return min(dfs(0), dfs(1))
+
+        return min(cost[0], cost[1])
+
+#TC O(N)
