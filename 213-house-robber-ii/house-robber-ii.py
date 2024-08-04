@@ -1,15 +1,26 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        if len(nums) == 1:
-            return nums[0]
         
-        def helper(start, end):
-            h1, h2 = 0, 0 
+        if len(nums) < 3:
+            return max(nums)
 
-            for i in range(start, end):
-                tmp = max(h1 + nums[i], h2)
-                h1 = h2
-                h2 = tmp
-            return h2
+        cache = {}
 
-        return max(helper(0, len(nums)-1), helper(1, len(nums)))
+        def dfs(i, j):
+            if i in cache:
+                return cache[i]
+
+            if i > j:
+                return 0
+            
+            rob = dfs(i + 2, j)  + nums[i]
+            skip = dfs(i + 1, j)
+
+            cache[i] = max(rob, skip)
+            return cache[i]
+        
+        
+        res1 = dfs(0, len(nums) - 2)
+        cache.clear()
+        res2 = dfs(1, len(nums) - 1)
+        return max(res1, res2)
