@@ -1,16 +1,19 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-
-        cache = {}
         
-        def dfs(i, cache):
+        cache = {}
+
+        def dfs(i):
+            if i in cache:
+                return cache[i]
+
             if i >= len(nums):
                 return 0
             
-            if i in cache:
-                return cache[i]
-            
-            cache[i] = max(nums[i] + dfs(i+2, cache), dfs(i+1, cache))
-            return cache[i]
+            rob = dfs(i + 2)
+            skip = dfs(i + 1)
 
-        return dfs(0, cache)
+            cache[i] = max(rob + nums[i], skip)
+            return cache[i]
+        
+        return dfs(0)
