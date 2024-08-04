@@ -1,26 +1,24 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        
         if len(nums) < 3:
             return max(nums)
 
-        cache = {}
+        def rob_linear(nums):
+            cache = {}
 
-        def dfs(i, j):
-            if i in cache:
+            def dfs(i):
+                if i in cache:
+                    return cache[i]
+                
+                if i >= len(nums):
+                    return 0
+                
+                rob = dfs(i + 2) + nums[i]
+                skip = dfs(i + 1)
+                
+                cache[i] = max(rob, skip)
                 return cache[i]
-
-            if i > j:
-                return 0
             
-            rob = dfs(i + 2, j)  + nums[i]
-            skip = dfs(i + 1, j)
-
-            cache[i] = max(rob, skip)
-            return cache[i]
+            return dfs(0)
         
-        
-        res1 = dfs(0, len(nums) - 2)
-        cache.clear()
-        res2 = dfs(1, len(nums) - 1)
-        return max(res1, res2)
+        return max(rob_linear(nums[:-1]), rob_linear(nums[1:]))
