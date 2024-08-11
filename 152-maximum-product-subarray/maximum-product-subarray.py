@@ -16,7 +16,7 @@ class Solution:
             max_val = max(max_val * nums[i], min_val * nums[i], nums[i])
             min_val = min(tmp, min_val * nums[i], nums[i])
             
-            res = max(max_val, min_val, res)
+            res = max(max_val, res)
         
         return res
 
