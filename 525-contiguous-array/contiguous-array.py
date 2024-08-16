@@ -1,18 +1,24 @@
 class Solution:
     def findMaxLength(self, nums: List[int]) -> int:
-        
-        count = 0
-        max_length=0
-        table = {0: -1}
-        for index, num in enumerate(nums):
-            if num == 0:
-                count -= 1
-            else:
-                count += 1
+       # -1 -2 -1 -2 -3 -4 -3 -2
+       #[0, 0, 1, 0, 0, 0, 1, 1]
+
+        prefix_map = {0: -1}
+
+        prefix_sum = 0
+
+        total = 0
+
+        for i in range(len(nums)):
+            if nums[i] == 1:
+                prefix_sum += 1
+            elif nums[i] == 0:
+                prefix_sum -= 1
             
-            if count in table:
-                max_length = max(max_length, index - table[count])
+            if prefix_sum in prefix_map:
+                L = prefix_map[prefix_sum]
+                total = max(total, (i - L))
             else:
-                table[count] = index
+                prefix_map[prefix_sum] = i
         
-        return max_length
+        return total
