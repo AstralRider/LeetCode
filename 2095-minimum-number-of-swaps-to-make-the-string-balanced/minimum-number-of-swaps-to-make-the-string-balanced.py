@@ -11,6 +11,7 @@ class Solution:
             
             maxCount = max(maxCount, count)
         
+        #We divide by 2 since a single swap fixes 2 unmatched brackets.
         return (maxCount + 1) //2
                 
 
