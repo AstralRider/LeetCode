@@ -23,6 +23,6 @@ class Solution:
             
             else:
                 return nums[mid]
-        return nums[l]
+
         #       *
         #[1,1,2,2,3]
