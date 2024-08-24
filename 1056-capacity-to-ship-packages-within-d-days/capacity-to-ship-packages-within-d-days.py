@@ -33,3 +33,4 @@ class Solution:
                 l = mid + 1
         return res 
 
+#Time O(N * log(sum(weights) - max(weights)))
