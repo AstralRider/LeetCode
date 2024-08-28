@@ -40,9 +40,4 @@ class Solution:
             new_curr = new_fast
 
         return new_prev
-        
-        #reverse again and run
-
-
-        #[8,3,13,2,5]
-
+    
