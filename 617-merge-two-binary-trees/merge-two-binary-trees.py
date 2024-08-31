@@ -7,17 +7,16 @@
 class Solution:
     def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
         
-        def dfs(root_1, root_2):
-            if not root_1 and not root_2:
-                return None
+        def dfs(t1, t2):
+            if not t1:
+                return t2
+            if not t2:
+                return t1
             
-            val1 = root_1.val if root_1 else 0
-            val2 = root_2.val if root_2 else 0
-            root = TreeNode(val1 + val2)
+            t1.val += t2.val
+            t1.left = dfs(t1.left, t2.left)
+            t1.right = dfs(t1.right, t2.right)
 
-            root.left = dfs(root_1.left if root_1 else None, root_2.left if root_2 else None)
-            root.right = dfs(root_1.right if root_1 else None, root_2.right if root_2 else None)
-
-            return root
+            return t1
+        
         return dfs(root1, root2)
-
