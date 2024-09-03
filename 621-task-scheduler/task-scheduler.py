@@ -15,18 +15,19 @@ class Solution:
         queue = collections.deque()
         time = 0
         while maxHeap or queue:
+            time += 1
+            if queue and queue[0][1] <= time:
+                count, t = queue.popleft()
+                heapq.heappush(maxHeap, count)
+            
             
             if maxHeap:
                 task = heapq.heappop(maxHeap)
                 task += 1
                 if task < 0:
-                    queue.append((task, time + n))
+                    queue.append((task, time + n + 1))
 
-            if queue and queue[0][1] <= time:
-                count, t = queue.popleft()
-                heapq.heappush(maxHeap, count)
             
-            time += 1
 
         return time
 
