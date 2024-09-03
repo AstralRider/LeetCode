@@ -22,7 +22,7 @@ class Solution:
                 if task < 0:
                     queue.append((task, time + n))
 
-            if queue and queue[0][1] == time:
+            if queue and queue[0][1] <= time:
                 count, t = queue.popleft()
                 heapq.heappush(maxHeap, count)
             
