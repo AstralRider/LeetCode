@@ -9,9 +9,12 @@ class Solution:
         for n in arr:
             countMap[n] = 1 + countMap.get(n, 0)
         
-        #O(N * logN)
+        #O(N)
         for count in countMap.values():
-            heapq.heappush(minHeap, count)
+            minHeap.append(count)
+        
+        #O(N)
+        heapq.heapify(minHeap)
 
         #(k * logN)
         while k > 0:
