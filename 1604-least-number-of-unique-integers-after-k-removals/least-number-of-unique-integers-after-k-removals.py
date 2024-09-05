@@ -10,19 +10,16 @@ class Solution:
             countMap[n] = 1 + countMap.get(n, 0)
         
         #O(N * logN)
-        for value, count in countMap.items():
-            heapq.heappush(minHeap, (count, value))
+        for count in countMap.values():
+            heapq.heappush(minHeap, count)
 
+        #(k * logN)
         while k > 0:
-            cnt, val = heapq.heappop(minHeap)
+            cnt = heapq.heappop(minHeap)
             tmp = cnt
             cnt -= k
             k -= tmp
             if cnt > 0:
-                heapq.heappush(minHeap, (cnt, val))
+                heapq.heappush(minHeap, cnt)
         
         return len(minHeap)
-
-
-
-        #arr = [3,1,1,3,3]
