@@ -1,21 +1,21 @@
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        combinations = []
-        curCom = []
-        self.helper(0, 0, combinations, curCom, candidates, target)
-        return combinations
+        
+        res = []
 
-    def helper(self, index, curSum, combinations, curCom, candidates, target):
-      if curSum == target:
-        combinations.append(curCom.copy())
-        return
-      elif curSum > target:
-        return
-      elif index == len(candidates):
-        return
-      curCom.append(candidates[index])
+        def dfs(i, combination, total):
+            print(total, target, combination)
+            if total == target:
+                res.append(combination.copy())
+                return
+            if i == len(candidates) or total > target:
+                return
+            
+            combination.append(candidates[i])
+            dfs(i, combination, total + candidates[i])
 
-      self.helper(index, curSum + candidates[index], combinations, curCom, candidates, target)
-      curCom.pop()
-    
-      self.helper(index + 1, curSum, combinations, curCom, candidates, target)
+            combination.pop()
+            dfs(i + 1, combination, total)
+        
+        dfs(0, [], 0)
+        return res
