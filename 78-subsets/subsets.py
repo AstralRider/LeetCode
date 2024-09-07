@@ -6,7 +6,7 @@ class Solution:
             if i == len(nums):
                 res.append(subset.copy())
                 return
-            print(i)
+
             subset.append(nums[i])
             dfs(i + 1, subset)
 
