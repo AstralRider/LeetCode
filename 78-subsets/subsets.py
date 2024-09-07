@@ -1,25 +1,17 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        #for subsets, we know total number of subsets = 2^n
-        subsets = []
-        currSet = []
-        self.helper(0, nums, subsets, currSet)
-        return subsets
+        res = []
 
-    def helper(self, i, nums, subsets, currSet):
-      if i == len(nums):
-        #O(n) operation
-        subsets.append(currSet.copy())
-        return
-      
-      currSet.append(nums[i])
+        def dfs(i, subset):
+            if i == len(nums):
+                res.append(subset.copy())
+                return
+            print(i)
+            subset.append(nums[i])
+            dfs(i + 1, subset)
 
-
-      self.helper(i + 1, nums, subsets, currSet)
-      #backtrack
-      currSet.pop()
-
-      self.helper(i + 1, nums, subsets, currSet)
-
-#Time Complexity: O(n * 2^n)
-#Space Complexity: O(n) for height of recursive stack
+            subset.pop()
+            dfs(i + 1, subset)
+        
+        dfs(0, [])
+        return res  
