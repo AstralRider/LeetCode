@@ -4,7 +4,6 @@ class Solution:
         res = []
 
         def dfs(i, combination, total):
-            print(total, target, combination)
             if total == target:
                 res.append(combination.copy())
                 return
