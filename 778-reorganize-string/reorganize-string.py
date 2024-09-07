@@ -16,6 +16,8 @@ class Solution:
         #O(N)
         heapq.heapify(maxHeap)
 
+        #Max of 26 different characters
+        #So technically resolves to O(1) since we have a constant
         while maxHeap:
             cnt, char = heapq.heappop(maxHeap)
             cnt += 1
