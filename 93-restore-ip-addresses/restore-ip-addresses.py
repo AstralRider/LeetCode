@@ -10,9 +10,8 @@ class Solution:
                 res.append(current[:-1])
                 return
             
-            for j in range(i, i + 3):
-                if j == len(s):
-                    return
+            for j in range(i, len(s)):
+
                 if int(s[i: j + 1]) < 256:
                     if len(s[i: j + 1]) > 1 and s[i] != '0':
                         backtrack(j + 1, current + s[i: j + 1] + '.', dots - 1)
