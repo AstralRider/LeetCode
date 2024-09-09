@@ -1,32 +1,27 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         res = []
-        curr = []
 
-        def backtrack(i):
-            if i == len(s):
-                res.append(curr.copy())
+        def backtrack(i, ans):
+            if i >= len(s):
+                res.append(ans.copy())
                 return
             
             for j in range(i, len(s)):
-                partition = s[i:j+1]
-                if self.isPalindromic(i,j,s):
-                    curr.append(partition)
-                    backtrack(j+1)
-                    curr.pop()
-
-        backtrack(0)
+                if self.isPalindrome(i, j, s):
+                    ans.append(s[i:j+1])
+                    backtrack(j + 1, ans)
+                    ans.pop()
+        
+        backtrack(0, [])
         return res
-    
-    def isPalindromic(self, start, end, string):
-        L = start
-        R = end
 
-        while L <= R:
-            if string[L] != string[R]:
+    #O(N)
+    def isPalindrome(self, left, right, string):
+        while left <= right:
+            if string[left] != string[right]:
                 return False
             else:
-                L += 1
-                R -= 1
+                left += 1
+                right -= 1
         return True
-            
